@@ -1,0 +1,29 @@
+{
+    "dependencies": {
+        "dotenv": "^16.5.0",
+        "grammy": "^1.35.1",
+        "mongoose": "^8.13.2",
+        "properties-reader": "^2.3.0"
+    },
+    "devDependencies": {
+        "@types/properties-reader": "^2.1.3",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.8.3"
+    },
+    "name": "spygame",
+    "version": "1.0.0",
+    "description": "A spy game in telegram.",
+    "main": "index.ts",
+    "scripts": {
+        "build": "npx tsc",
+        "dev": "nodemon index.ts",
+        "start": "nodemon dist/index.js"
+    },
+    "keywords": [
+        "telegram",
+        "telegram-bot"
+    ],
+    "author": "Kevin :D",
+    "license": "ISC",
+    "type": "commonjs"
+}
