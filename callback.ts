@@ -155,7 +155,7 @@ bot.on('callback_query', function (ctx: NonNullable<Context>) {
                     ]
                     keyb[1] = [
                         btn.text(lang_data.flag, `lang_menu`),
-                        btn.url(lang_data.button['source_code'], process.env['SOURCE_CODE_URL'] as string)
+                        btn.url(lang_data.button['source_code'], process.env['SOURCE_CODE'] as string)
                     ]
 
                     ctx.editMessageText(lang_data.string['start'].replace(`{NAME}`, result.username ?? result.hyperlink), { parse_mode: 'HTML', reply_markup: markup.inlineKeyboard(keyb) });
