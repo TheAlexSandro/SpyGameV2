@@ -14,7 +14,7 @@
     "name": "spygame",
     "version": "1.0.0",
     "description": "A spy game in telegram.",
-    "main": "index.ts",
+    "main": "index.js",
     "scripts": {
         "dev": "nodemon index.ts",
         "start": "node dist/index.js"

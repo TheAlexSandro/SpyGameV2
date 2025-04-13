@@ -3,7 +3,7 @@
     "game_private_warn": "⚠️ Perintah ini hanya bisa digunakan di grup.",
     "game": "🕵🏻‍♂️ <b>Permainan Spy</b>\nHost: {HOST}\n\n👤 <b>Pemain:</b>\n{LIST}\nJumlah Pemain: {PLAYER}\nWaktu Pendaftaran: {TIME}",
     "lang_select_private": "Berikut bahasa yang tersedia saat ini:",
-    "lang_change": "🇬🇧 Bahasa berhasil diubah ke Bahasa Inggris.",
+    "lang_change": "🇮🇩 Bahasa berhasil diubah ke Bahasa Inggris.",
     "player_list": "👤 <b>Daftar Pemain:</b>\nSekarang... semua orang sedang menjelaskan kata yang mereka dapat.\n\n{LIST}\nWaktu menjawab: {TIME} detik.",
     "words": "🔠 Kata kamu adalah: <i>{WORD}</i>\n📕 Kategori: {CATEGORY}",
     "no_game": "⚠️ Permainan ini tidak tersedia.",

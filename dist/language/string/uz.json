@@ -3,7 +3,7 @@
     "game_private_warn": "⚠️ Bu buyruq faqat guruhlarda ishlaydi.",
     "game": "🕵🏻‍♂️ <b>Josuslar O'yini</b>\nXost: {HOST}\n\n👤 <b>O'yinchilar:</b>\n{LIST}\nO'yinchilar soni: {PLAYER}\nRo'yxatdan o'tish vaqti: {TIME}",
     "lang_select_private": "Hozirda mavjud tillar quyidagilar:",
-    "lang_change": "🇬🇧 Til muvaffaqiyatli ingliz tiliga o'zgartirildi.",
+    "lang_change": "🇺🇿 Til muvaffaqiyatli ingliz tiliga o'zgartirildi.",
     "player_list": "👤 <b>O'yinchilar:</b>\nHamma o'ziga berilgan so'zni tasvirlamoqda.\n\n{LIST}\nJavob berish vaqti: {TIME} soniya.",
     "words": "🔠 So'zingiz: <i>{WORD}</i>\n📕 Kategoriya: {CATEGORY}",
     "no_game": "⚠️ Bu o'yin mavjud emas.",
