@@ -85,36 +85,7 @@ const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop
                     var id = players[i];
 
                     prop.set(`role_${id}_${gameID}`, isSpy ? 'spy' : 'civil');
-                    if (isSpy) {
-                        var spyLists = prop.get(`spy_team_${gameID}`);
-                        if (!spyLists) { prop.set(`spy_team_${gameID}`, `${id}`) } else { prop.set(`spy_team_${gameID}`, `${spyLists},${id}`) };
-                    }
-                    const roleMsg = isSpy ? lang_data.string['spy_role'] : lang_data.string['civil_role'];
-                    if (!prop.get(`has_send_role_${id}_${gameID}`)) {
-                        bot.api.sendMessage(id, roleMsg, { parse_mode: 'HTML' });
-                        prop.set(`has_send_role_${gameID}`, 'true');
-                    }
                 }
-            }
-
-            if (Number(prop.get(`spy_count_${gameID}`)) > 1 && !prop.get(`role_assigned_${gameID}`)) {
-                var spyList = String(prop.get(`spy_team_${gameID}`)).split(',');
-                setTimeout(() => {
-                    for (var i = 0; i < players!.length; i++) {
-                        const id = players[i];
-                        const role = String(prop.get(`role_${id}_${gameID}`));
-                        if (role == 'spy') {
-                            var spy = '';
-                            for (var g = 0; g < spyList.length; g++) {
-                                const spyID = spyList[g];
-
-                                spy += `${prop.get(`user_${spyID}_${gameID}`)}\n`;
-                            }
-                            prop.set(`spy_chat_${id}`, gameID);
-                            bot.api.sendMessage(id, lang_data.string['spy_team'].replace(`{LIST}`, spy), { parse_mode: 'HTML' })
-                        }
-                    }
-                }, 700)
             }
 
             setTimeout(() => {
@@ -147,7 +118,7 @@ const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop
                     }
                 }, 1000)
                 prop.set(`intervals_g_${gameID}`, String(ints));
-            }, 1000)
+            }, 700)
         })
 
         var gameTime = 0;
