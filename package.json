@@ -16,6 +16,7 @@
     "description": "A spy game in telegram.",
     "main": "dist/index.js",
     "scripts": {
+        "build": "tsc",
         "start": "node dist/index.js"
     },
     "keywords": [
