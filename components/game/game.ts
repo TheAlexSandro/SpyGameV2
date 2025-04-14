@@ -238,7 +238,7 @@ const finish = (team: Team, gameID: string, lang: string, chatID: string, bot: B
             var getRole = String(prop.get(`role_${id}_${gameID}`));
             var userLink = prop.get(`user_${id}_${gameID}`);
             var roles = (getRole == 'spy') ? lang_data.string['role_spy'] : lang_data.string['role_civil'];
-            var msgs = (team == 'spy') ? lang_data.string['spy_victory_pvt'] : lang_data.string['civil_victory_pvt'];
+            var msgs = (team == 'spy') ? lang_data.string['spy_victory_pvt'] : (team == 'civil') ? lang_data.string['civil_victory_pvt'] : lang_data.string['nothing_victory_pvt'];
 
             prop.read(`session_${id}`);
             prop.read(`spy_chat_${id}`);
@@ -255,10 +255,10 @@ const finish = (team: Team, gameID: string, lang: string, chatID: string, bot: B
         }
 
         const gameTime = String(prop.get(`game_time_${gameID}`));
-        const msg = (team == 'spy') ? lang_data.string['spy_victory'] : lang_data.string['civil_victory'];
+        const msg = (team == 'spy') ? lang_data.string['spy_victory'] : (team == 'civil') ? lang_data.string['civil_victory'] : lang_data.string['nothing_victory'];
         var pList: any;
         if (team == 'nothing') {
-            pList = msg.replace(`{OTHER}`, plyr)
+            pList = msg.replace(`{WINNER}`, '--\n').replace(`{OTHER}`, plyr)
         } else {
             pList = msg.replace(`{WINNER}`, winner).replace(`{OTHER}`, plyr)
         }
