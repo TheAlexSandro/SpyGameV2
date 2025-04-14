@@ -113,6 +113,7 @@ const lynch = (userID: string, gameID: string, lang: string, chatID: string, bot
 
 const kick = (userID: any[], gameID: string, lang: string, chatID: string, bot: Bot, prop: Reader): void => {
     helper.language(lang, (error: Error | null, lang_data: any) => {
+        if (userID.length == 0) return;
         var p = [];
         for (var i = 0; i < userID.length; i++) {
             var id = userID[i];

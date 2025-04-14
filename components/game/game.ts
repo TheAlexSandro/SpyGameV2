@@ -24,6 +24,7 @@ const starts = (action: StartsAction, gameID: string, chatID: string, prop: Read
 const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop: Reader): void => {
     prop.set(`started_${gameID}`, 'true');
     prop.read(`time_vote_${gameID}`);
+    prop.set(`just_start_${gameID}`, 'true');
     const players = prop.get(`players_${gameID}`)?.toString().split(',');
     const keyb: InlineKeyboardButton[][] = [];
     if (!players || players.length === 0) return;
@@ -37,20 +38,22 @@ const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop
     prop.read(`index_answer_${gameID}`);
     prop.read(`vote_index_${gameID}`);
     prop.read(`votes_${gameID}`);
-    var spyCount = Number(prop.get(`spy_count_${gameID}`));
-    var civilCount = Number(prop.get(`civil_count_${gameID}`));
-    if (Number(getDay) == Number(prop.get(`max_day_${gameID}`))) {
-        prop.set(`ended_${gameID}`, 'true');
-        finish('spy', gameID, lang, chatID, bot, prop);
-    } else if (spyCount == 0 && civilCount == 0) {
-        prop.set(`ended_${gameID}`, 'true');
-        finish('nothing', gameID, lang, chatID, bot, prop);
-    } else if (spyCount == 0 && civilCount > 0) {
-        prop.set(`ended_${gameID}`, 'true');
-        finish('civil', gameID, lang, chatID, bot, prop);
-    } else if (handler.isSpyWin(spyCount, civilCount)) {
-        prop.set(`ended_${gameID}`, 'true');
-        finish('spy', gameID, lang, chatID, bot, prop);
+    if (!prop.get(`just_start_${gameID}`)) {
+        var spyCount = Number(prop.get(`spy_count_${gameID}`));
+        var civilCount = Number(prop.get(`civil_count_${gameID}`));
+        if (Number(getDay) == Number(prop.get(`max_day_${gameID}`))) {
+            prop.set(`ended_${gameID}`, 'true');
+            finish('spy', gameID, lang, chatID, bot, prop);
+        } else if (spyCount == 0 && civilCount == 0) {
+            prop.set(`ended_${gameID}`, 'true');
+            finish('nothing', gameID, lang, chatID, bot, prop);
+        } else if (spyCount == 0 && civilCount > 0) {
+            prop.set(`ended_${gameID}`, 'true');
+            finish('civil', gameID, lang, chatID, bot, prop);
+        } else if (handler.isSpyWin(spyCount, civilCount)) {
+            prop.set(`ended_${gameID}`, 'true');
+            finish('spy', gameID, lang, chatID, bot, prop);
+        }
     }
 
     if (prop.get(`ended_${gameID}`)) return;
@@ -159,6 +162,7 @@ const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop
 
 const timesUp = (gameID: string, lang: string, chatID: string, bot: Bot, prop: Reader): void => {
     prop.set(`role_assigned_${gameID}`, 'true');
+    prop.read(`just_start_${gameID}`);
     const players = prop.get(`players_${gameID}`)?.toString().split(',');
     if (!players || players.length === 0) return;
 
