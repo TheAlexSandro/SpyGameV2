@@ -7,6 +7,7 @@ import { Reader } from 'properties-reader';
 import helper from '../helper/helper';
 import { markup, btn } from '../button/inline'
 import handler from './handler';
+import db from '../database/db';
 
 type StartsAction = 'begin' | 'cancel';
 const starts = (action: StartsAction, gameID: string, chatID: string, prop: Reader, lang?: string, bot?: Bot): void => {
@@ -22,7 +23,6 @@ const starts = (action: StartsAction, gameID: string, chatID: string, prop: Read
 }
 
 const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop: Reader): void => {
-    prop.set(`started_${gameID}`, 'true');
     prop.read(`time_vote_${gameID}`);
     const players = prop.get(`players_${gameID}`)?.toString().split(',');
     const keyb: InlineKeyboardButton[][] = [];
@@ -239,19 +239,37 @@ const finish = (team: Team, gameID: string, lang: string, chatID: string, bot: B
             var userLink = prop.get(`user_${id}_${gameID}`);
             var roles = (getRole == 'spy') ? lang_data.string['role_spy'] : lang_data.string['role_civil'];
             var msgs = (team == 'spy') ? lang_data.string['spy_victory_pvt'] : (team == 'civil') ? lang_data.string['civil_victory_pvt'] : lang_data.string['nothing_victory_pvt'];
+            var spyScore = Number(prop.get(`spy_score_${id}_${gameID}`));
+            var civilScore = Number(prop.get(`civil_score_${id}_${gameID}`));
 
             prop.read(`session_${id}`);
             prop.read(`spy_chat_${id}`);
-            if (Number(prop.get(`spy_count_${gameID}`)) == 0 && Number(prop.get(`civil_count_${gameID}`)) == 0) {
+            if (team == 'nothing') {
                 plyr += `${userLink} - ${roles}\n`
+                bot.api.sendMessage(id, msgs.replace(`{SCORE}`, 0), { parse_mode: 'HTML' });
             } else {
-                if (!prop.get(`player_died_${id}_${gameID}`)) {
-                    winner += `${userLink} - ${roles}\n`
-                } else {
-                    plyr += `${userLink} - ${roles}\n`
+                if (team == 'civil') {
+                    if (getRole == 'civil' && !prop.get(`player_died_${id}_${gameID}`)) {
+                        winner += `${userLink} - ${roles}\n`
+                        var scores = civilScore + Number(process.env['SCORE']);
+                        bot.api.sendMessage(id, msgs.replace(`{SCORE}`, process.env['SCORE']), { parse_mode: 'HTML' });
+                        db.editData(id, team, scores, 'private');
+                    } else {
+                        plyr += `${userLink} - ${roles}\n`
+                        bot.api.sendMessage(id, msgs.replace(`{SCORE}`, 0), { parse_mode: 'HTML' });
+                    }
+                } else if (team == 'spy') {
+                    if (getRole == 'spy' && !prop.get(`player_died_${id}_${gameID}`)) {
+                        winner += `${userLink} - ${roles}\n`
+                        var scores = spyScore + Number(process.env['SCORE']);
+                        bot.api.sendMessage(id, msgs.replace(`{SCORE}`, process.env['SCORE']), { parse_mode: 'HTML' });
+                        db.editData(id, team, scores, 'private');
+                    } else {
+                        plyr += `${userLink} - ${roles}\n`
+                        bot.api.sendMessage(id, msgs.replace(`{SCORE}`, 0), { parse_mode: 'HTML' });
+                    }
                 }
             }
-            bot.api.sendMessage(id, msgs, { parse_mode: 'HTML' });
         }
 
         const gameTime = String(prop.get(`game_time_${gameID}`));

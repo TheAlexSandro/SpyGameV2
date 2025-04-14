@@ -65,6 +65,8 @@ bot.on('callback_query', function (ctx: NonNullable<Context>) {
                     }
 
                     if (act == 'start') {
+                        if (prop.get(`started_${gameID}`)) return ctx.answerCallbackQuery('');
+                        prop.set(`started_${gameID}`, 'true');
                         var players = String(prop.get(`players_${gameID}`)).split(',');
                         if (players.length < Number(process.env['MIN_PLAYERS'])) return ctx.answerCallbackQuery({ text: lang_data.string['insufficient_players'].replace(`{PLAYER}`, process.env['MIN_PLAYERS']), show_alert: true });
 

@@ -46,6 +46,11 @@ bot.on('message', function (ctx: NonNullable<Context>) {
                     prop.set(`first_name_${userID}_${gameID}`, result.first_name);
                 })
 
+                db.getData(String(userID), 'private', (error: Error | null, score: any) => {
+                    prop.set(`spy_score_${userID}_${gameID}`, score['spy']);
+                    prop.set(`civil_score_${userID}_${gameID}`, score['civil']);
+                })
+
                 var players = prop.get(`players_${gameID}`);
                 prop.set(`players_${gameID}`, `${players},${String(userID)}`);
                 prop.set(`players_native_${gameID}`, `${players},${String(userID)}`);
@@ -59,6 +64,7 @@ bot.on('message', function (ctx: NonNullable<Context>) {
                     }
 
                     if (newPlayers!.length == Number(process.env['MAX_PLAYERS'])) {
+                        prop.set(`started_${gameID}`, 'true');
                         game.starts('begin', gameID, groupID, prop, String(prop.get(`game_lang_${gameID}`)), bot);
                         return;
                     }
@@ -128,6 +134,12 @@ bot.on('message', function (ctx: NonNullable<Context>) {
                         })
 
                         db.addData(String(chatID), 'group');
+                        db.addData(String(userID), 'private');
+
+                        db.getData(String(userID), 'private', (error: Error | null, score: any) => {
+                            prop.set(`spy_score_${userID}_${gameID}`, score['spy']);
+                            prop.set(`civil_score_${userID}_${gameID}`, score['civil']);
+                        })
                         prop.set(`game_id_${String(chatID)}`, ID);
                         prop.set(`title_${ID}`, String(ctx.chat.title));
                         prop.set(`chat_id_${ID}`, String(chatID));
@@ -149,6 +161,7 @@ bot.on('message', function (ctx: NonNullable<Context>) {
                             times--;
 
                             if (/(60|30|10)/i.exec(String(times))) {
+                                if (prop.get(`started_${gameID}`)) return;
                                 ctx.reply(lang_data.string['time_message'].replace(`{TIME}`, times))
                                     .then((result) => {
                                         var getMsg = Number(prop.get(`index_msgid_${ID}`));
@@ -159,6 +172,7 @@ bot.on('message', function (ctx: NonNullable<Context>) {
 
                             if (times <= 0) {
                                 clearInterval(ints);
+                                prop.set(`started_${gameID}`, 'true');
                                 var players = String(prop.get(`players_${ID}`)).split(',');
                                 if (players.length < Number(process.env['MIN_PLAYERS'])) {
                                     game.starts('cancel', ID, String(chatID), prop, null, bot);

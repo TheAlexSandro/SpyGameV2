@@ -16,7 +16,8 @@ db.once("open", () => {
 
 const userSchema = new Schema({
     id: { type: String, required: true },
-    point: { type: String, default: '0' },
+    spy: { type: String, default: '0' },
+    civil: { type: String, default: '0' },
     language_code: { type: String, default: 'en' }
 });
 

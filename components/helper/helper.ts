@@ -4,6 +4,8 @@ config({ path: '.env' });
 import { Bot } from "grammy";
 import * as flag from '../../language/flags/flags.json';
 
+const extension = process.env['production'] ? 'js' : 'ts';
+
 const getUser = function (user_id: string, bot: Bot, callback: (error: Error | null, result: any) => void): void {
     bot.api.getChat(user_id)
         .then((result) => {
@@ -25,8 +27,8 @@ const clearHTML = function (s: string): string {
 
 const language = function (lang_code: string, callback: (error: Error | null, result: any | null) => void): any {
     return Promise.all([
-        import(`../../language/string/${lang_code}.js`),
-        import(`../../language/button/${lang_code}.js`),
+        import(`../../language/string/${lang_code}.${extension}`),
+        import(`../../language/button/${lang_code}.${extension}`),
     ])
         .then(([stringData, buttonData]) => {
             const flags = flag as Record<string, string>;
@@ -38,7 +40,7 @@ const language = function (lang_code: string, callback: (error: Error | null, re
 }
 
 const getWords = function (lang_code: string, callback: (error: Error | null, result: any | null) => void): any {
-    import(`../game/words/words-${lang_code}.js`)
+    import(`../game/words/words-${lang_code}.${extension}`)
         .then((result) => callback(null, result.default));
 }
 
