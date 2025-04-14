@@ -1,4 +1,4 @@
-{
+const id = {
     "start": "👋 Halo {NAME}, selamat datang di Permainan Spy!\n\n🕹 <b>Cara bermain?</b>\n• Tambahkan bot ini ke grupmu dan main di sana, minimal 4 pemain.\n• Kirim perintah /spy untuk memulai permainan.\n• Saat pemain sudah mencapai minimal atau lebih, tekan mulai.\n• Aku akan mengirim semua pemain dengan kosakata yang sama, tapi... hanya 1-2 pemain yang punya kosakata berbeda.\n\n👨🏼 <b>Warga Sipil</b>\nTugasmu adalah menemukan siapa spy dan menangkan permainan.\n\n🕵🏻‍♂️ <b>Spy</b>\nKamu adalah orang yang punya kosakata berbeda, tugasmu adalah menyamar dan menangkan permainan.\n\nHati-hati dengan orang yang kamu anggap teman, mereka bisa berbohong!",
     "game_private_warn": "⚠️ Perintah ini hanya bisa digunakan di grup.",
     "game": "🕵🏻‍♂️ <b>Permainan Spy</b>\nHost: {HOST}\n\n👤 <b>Pemain:</b>\n{LIST}\nJumlah Pemain: {PLAYER}\nWaktu Pendaftaran: {TIME}",
@@ -45,3 +45,4 @@
     "msg_sent": "✅ Pesan berhasil dikirim.",
     "no_answer": "☠️ {PLAYER} tidak menjelaskan kata yang mereka dapat."
 }
+export default id;

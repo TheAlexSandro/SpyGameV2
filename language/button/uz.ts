@@ -1,4 +1,4 @@
-{
+const uz = {
     "start": "Guruhga qo'shish ↗️",
     "source_code": "🗂 Manba kodi",
     "join_game": "🕵🏻‍♂️ O'yinga qo'shilish",
@@ -8,3 +8,4 @@
     "leave_game": "❌ Chiqish",
     "to_bot": "Botni ochish ↗️"
 }
+export default uz;

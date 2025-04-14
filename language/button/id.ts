@@ -1,4 +1,4 @@
-{
+const id = {
     "start": "Tambahkan ke grup ↗️",
     "source_code": "🗂 Kode Sumber",
     "join_game": "🕵🏻‍♂️ Ikut Bermain",
@@ -8,3 +8,4 @@
     "leave_game": "❌ Keluar",
     "to_bot": "Buka bot ↗️"
 }
+export default id;

@@ -1,4 +1,4 @@
-{
+const en = {
     "start": "Add to group ↗️",
     "source_code": "🗂 Source Code",
     "join_game": "🕵🏻‍♂️ Join Game",
@@ -8,3 +8,4 @@
     "leave_game": "❌ Leave",
     "to_bot": "Open the bot ↗️"
 }
+export default en;

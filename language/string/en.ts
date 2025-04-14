@@ -1,4 +1,4 @@
-{
+const en = {
     "start": "👋 Hello {NAME}, welcome to the Spy Game!\n\n🕹 <b>How to play?</b>\n• Add this bot to your group and play there, minimum is 4 players.\n• Send the /spy command to start the game.\n• When the players has reached the minimum or more, press start.\n• I'll send every players with the same vocabulary, but... only 1-2 player has the different vocabulary.\n\n👨🏼 <b>Civilian</b>\nYour task is to find who's the spy and win the game.\n\n🕵🏻‍♂️ <b>Spy</b>\nYou're the one who have different vocabulary, your task is to go undercover and win the game.\n\nBe careful of people you consider friends, they can lie!",
     "game_private_warn": "⚠️ This command only work in groups.",
     "game": "🕵🏻‍♂️ <b>Spy Game</b>\nHost: {HOST}\n\n👤 <b>Players:</b>\n{LIST}\nPlayers: {PLAYER}\nRegistration Time: {TIME}",
@@ -45,3 +45,4 @@
     "msg_sent": "✅ Message sent.",
     "no_answer": "☠️ {PLAYER} did not described the word they got."
 }
+export default en;

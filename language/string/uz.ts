@@ -1,4 +1,4 @@
-{
+const uz = {
     "start": "👋 Salom {NAME}, Josuslar O'yiniga xush kelibsiz!\n\n🕹 <b>Qanday o'ynash kerak?</b>\n• Botni guruhingizga qo'shing va shu yerda o'ynang, kamida 4 o'yinchi kerak.\n• O'yinni boshlash uchun /spy buyrug'ini yuboring.\n• O'yinchilar yetarli bo'lsa, 'boshlash' tugmasini bosing.\n• Men har bir o'yinchiga bir xil so'z yuboraman, lekin... faqat 1-2 o'yinchi boshqacha so'z oladi.\n\n👨🏼 <b>Oddiy fuqaro</b>\nVazifangiz — josus kimligini topish va o'yinda g'alaba qozonish.\n\n🕵🏻‍♂️ <b>Josus</b>\nSiz boshqacha so'zga egasiz, yashirinib qoling va o'yinda g'alaba qozoning.\n\nIshonchingizni oqlagan do'stlardan ehtiyot bo'ling, ular yolg'on gapirishlari mumkin!",
     "game_private_warn": "⚠️ Bu buyruq faqat guruhlarda ishlaydi.",
     "game": "🕵🏻‍♂️ <b>Josuslar O'yini</b>\nXost: {HOST}\n\n👤 <b>O'yinchilar:</b>\n{LIST}\nO'yinchilar soni: {PLAYER}\nRo'yxatdan o'tish vaqti: {TIME}",
@@ -45,3 +45,4 @@
     "msg_sent": "✅ Xabar yuborildi.",
     "no_answer": "☠️ {PLAYER} o'ziga berilgan so'zni tasvirlamadi."
 }
+export default uz;
