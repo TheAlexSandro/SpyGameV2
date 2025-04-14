@@ -14,7 +14,7 @@
     "name": "spygame",
     "version": "1.0.0",
     "description": "A spy game in telegram.",
-    "main": "index.js",
+    "main": "dist/index.js",
     "keywords": [
         "telegram",
         "telegram-bot"
