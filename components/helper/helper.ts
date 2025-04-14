@@ -3,20 +3,6 @@ config({ path: '.env' });
 
 import { Bot } from "grammy";
 import * as flag from '../../language/flags/flags.json';
-import * as wordsen from '../game/words/words-en';
-import * as wordsid from '../game/words/words-id';
-import * as wordsru from '../game/words/words-ru';
-import * as wordsuz from '../game/words/words-uz';
-
-import * as btnen from '../../language/button/en';
-import * as btnid from '../../language/button/id';
-import * as btnru from '../../language/button/ru';
-import * as btnuz from '../../language/button/uz';
-
-import * as stren from '../../language/string/en';
-import * as strid from '../../language/string/id';
-import * as strru from '../../language/string/ru';
-import * as struz from '../../language/string/uz';
 
 const getUser = function (user_id: string, bot: Bot, callback: (error: Error | null, result: any) => void): void {
     bot.api.getChat(user_id)
@@ -39,8 +25,8 @@ const clearHTML = function (s: string): string {
 
 const language = function (lang_code: string, callback: (error: Error | null, result: any | null) => void): any {
     return Promise.all([
-        import(`../../language/string/${lang_code}.ts`),
-        import(`../../language/button/${lang_code}.ts`),
+        import(`../../language/string/${lang_code}.js`),
+        import(`../../language/button/${lang_code}.js`),
     ])
         .then(([stringData, buttonData]) => {
             const flags = flag as Record<string, string>;
@@ -52,7 +38,7 @@ const language = function (lang_code: string, callback: (error: Error | null, re
 }
 
 const getWords = function (lang_code: string, callback: (error: Error | null, result: any | null) => void): any {
-    import(`../game/words/words-${lang_code}.ts`)
+    import(`../game/words/words-${lang_code}.js`)
         .then((result) => callback(null, result.default));
 }
 
