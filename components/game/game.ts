@@ -24,7 +24,6 @@ const starts = (action: StartsAction, gameID: string, chatID: string, prop: Read
 const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop: Reader): void => {
     prop.set(`started_${gameID}`, 'true');
     prop.read(`time_vote_${gameID}`);
-    prop.set(`just_start_${gameID}`, 'true');
     const players = prop.get(`players_${gameID}`)?.toString().split(',');
     const keyb: InlineKeyboardButton[][] = [];
     if (!players || players.length === 0) return;
@@ -33,6 +32,7 @@ const initialize = (gameID: string, lang: string, chatID: string, bot: Bot, prop
         var spyCount = handler.spys(players!.length);
         prop.set(`spy_count_${gameID}`, spyCount);
         prop.set(`civil_count_${gameID}`, Number(players!.length) - spyCount);
+        prop.set(`just_start_${gameID}`, 'true');
     }
 
     prop.read(`index_answer_${gameID}`);
